@@ -1,6 +1,6 @@
 import 'package:coolme121server/coolme121server.dart';
 
-class UserNameController extends ResourceController
+class RegController extends ResourceController
 {
   @override
   Future<RequestOrResponse> handle(Request request) async
@@ -8,14 +8,14 @@ class UserNameController extends ResourceController
     final String ipAddress = request.connectionInfo.remoteAddress.address;
     final Map<String, dynamic> data = await request.body.decode();
     //final Person person = Person.fromJson(await request.body.decode());
-    final bool isTaken = await CheckDB.UserName(data["userName"] as String);
+    await CheckDB.RegSave(
+      data["userName"] as String,
+      data["email"] as String,
+      data["passWord"] as String,
+      ipAddress,
+    );
     final TravelMessage travelMessage = TravelMessage();
-    if (isTaken)
-    {
-      travelMessage.result = false;
-      travelMessage.description = "This UserName is Taken";
-      return Response.ok(jsonEncode(travelMessage));
-    }
+
     travelMessage.result = true;
     travelMessage.description = null;
 

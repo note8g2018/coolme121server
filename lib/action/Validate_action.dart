@@ -29,6 +29,11 @@ class ValidateDate
     return EmailValidator.validate(email);
   }
 
+  static bool validateReg(String Username, String Email, String PassWord)
+  {
+    return userName(Username) && email(Email) && passWord1(PassWord);
+  }
+
 //  static bool validateReg(Person person)
 //  {
 //    return userName(person.userName) && passWord1(person.passWord) && email(person.email);

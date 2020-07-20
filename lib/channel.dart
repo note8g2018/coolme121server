@@ -36,8 +36,30 @@ class Coolme121serverChannel extends ApplicationChannel {
 
     router
         .route("/checkusername")
-        .link(() => ValidateController())
+        .link(() => ValidateUserNameController())
         .link(() => UserNameController());
+
+    router
+        .route("/checkemail")
+        .link(() => ValidateEmailController())
+        .link(() => EmailController());
+
+    router
+        .route("/reg")
+        .link(() => ValidateRegController())
+        .link(() => CheckRegController())
+        .link(() => RegController());
+
+    router
+        .route('/login')
+        .link(() => CheckLoginController())
+        .link(() => LoginController());
+
+    router
+        .route('/loginPerson')
+        .link(() => LoginPersonController());
+
+    router.route('/logout').link(() => LogoutController());
 
     return router;
   }
