@@ -67,6 +67,7 @@ class CheckDB
       'passWord': passWord,
       'ipAddress': ipAddress,
       'registrationTimeUTC': DateTime.now().toUtc(),
+      'registrationTimeUTC_M': DateTime.now().toUtc().millisecondsSinceEpoch,
       'isLogin': true,
     });
     print(result);

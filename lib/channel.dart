@@ -61,6 +61,10 @@ class Coolme121serverChannel extends ApplicationChannel {
 
     router.route('/logout').link(() => LogoutController());
 
+    router.route('/article').link(() => ArticleController());
+
+    router.route('/articleall').link(() => ArticleAllController());
+
     return router;
   }
 }

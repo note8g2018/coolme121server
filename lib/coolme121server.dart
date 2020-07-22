@@ -44,3 +44,11 @@ export 'package:coolme121server/model/Person_model.dart';
 export 'package:coolme121server/controller/LoginPerson_controller.dart';
 // ignore: directives_ordering
 export 'package:coolme121server/controller/Logout_controller.dart';
+// ignore: directives_ordering
+export 'package:coolme121server/model/Article_model.dart';
+// ignore: directives_ordering
+export 'package:coolme121server/controller/Article_controller.dart';
+// ignore: directives_ordering
+export 'package:coolme121server/database/Article_DB.dart';
+// ignore: directives_ordering
+export 'package:coolme121server/controller/ArticleAll_controller.dart';
