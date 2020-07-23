@@ -7,7 +7,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 /// database connections. See http://aqueduct.io/docs/http/channel/.
 class Coolme121serverChannel extends ApplicationChannel {
   // ignore: close_sinks
-  final StreamController<Map<String, dynamic>> controller = StreamController<Map<String, dynamic>>();
+  final StreamController<String> controller = StreamController<String>();
   /// Initialize services in this method.
   ///
   /// Implement this method to initialize services, read values from [options]
@@ -25,9 +25,10 @@ class Coolme121serverChannel extends ApplicationChannel {
       await db.open();
       final DbCollection collectionArticle = db.collection('articles');
       var cursor = collectionArticle.createCursor({"author": "zaq12wsx2"});
+    
     for (var doc = await cursor.nextObject(); doc != null; doc = await cursor.nextObject())
     {
-      controller.add(doc);
+      controller.add(jsonEncode(doc));
     }
 
 
