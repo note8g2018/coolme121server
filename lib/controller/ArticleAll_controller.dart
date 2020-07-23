@@ -19,8 +19,15 @@ class ArticleAllController extends ResourceController
     db = mongo.Db(url);
     await db.open();
     final mongo.DbCollection collectionArticle = db.collection('articles');
+    var cursor = collectionArticle.createCursor({"author": "zaq12wsx2"});
     var myStream = collectionArticle.find({"author": "zaq12wsx2"});
 
-    return Response.ok(myStream);
+    for (var doc = await cursor.nextObject(); doc != null; doc = await cursor.nextObject())
+    {
+      print(doc); // Prints documents one at a time
+       Response.ok(doc);
+    }
+    //myStream.pipe(Response.ok());
+    //return Response.ok(cursor.stream);
   }
 }
