@@ -5,14 +5,14 @@ class Article
   String title;
   String body;
   String author;
-  DateTime writeTimeUTC;
+  DateTime writingTimeUTC;
   bool isPublic;
 
   Article({
     this.title,
     this.body,
     this.author,
-    this.writeTimeUTC,
+    this.writingTimeUTC,
     this.isPublic,
   });
 
@@ -27,12 +27,14 @@ class Article
 //    {
 //      _dateTime = DateTime.fromMillisecondsSinceEpoch(jsonObj["writeTimeUTC"] as int).toUtc();
 //    }
+//      int kk = jsonObj["writeTimeUTC"] as int;
     return Article(
       title: jsonObj["title"] as String,
       body: jsonObj["body"] as String,
       author: jsonObj["author"] as String,
-      writeTimeUTC: jsonObj["writeTimeUTC"] as DateTime,
       isPublic: jsonObj["isPublic"] as bool,
+      writingTimeUTC: DateTime.parse(jsonObj["writingTimeUTC"] as String),
+      //writingTimeUTC: DateTime.parse(jsonObj["writeTimeUTC"] as String),
     );
   }
 
@@ -42,7 +44,7 @@ class Article
       "title": title,
       "body": body,
       "author": author,
-      "writeTimeUTC": writeTimeUTC?.toUtc(),
+      "writingTimeUTC": writingTimeUTC?.toUtc()?.toString(),
       "isPublic": isPublic,
     };
   }

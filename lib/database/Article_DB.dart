@@ -21,10 +21,15 @@ abstract class ArticleDB
     //return userNameJson?.isNotEmpty?? false;
     if(userNameJson.isNotEmpty)
       {
-        article.writeTimeUTC = DateTime.now().toUtc();
-        final result = await collectionArticle.save(
-          article.toJson()
-        );
+        article.writingTimeUTC = DateTime.now().toUtc();
+//        final result = await collectionArticle.save({
+//          "author": article.author,
+//          "title": article.title,
+//          "body": article.body,
+//          "isPublic": article.isPublic,
+//          "writingTimeUTC": article.writingTimeUTC.toUtc().millisecondsSinceEpoch,
+//        });
+        final result = await collectionArticle.save(article.toJson());
       if(result["ok"] == 1.0)
         {
           return true;

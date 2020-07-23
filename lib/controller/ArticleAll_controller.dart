@@ -1,7 +1,10 @@
 import 'package:coolme121server/coolme121server.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
-class ArticleAllController extends ResourceController {
+class ArticleAllController extends ResourceController
+{
+
+
   @override
   Future<RequestOrResponse> handle(Request request) async
   {
@@ -16,9 +19,8 @@ class ArticleAllController extends ResourceController {
     db = mongo.Db(url);
     await db.open();
     final mongo.DbCollection collectionArticle = db.collection('articles');
-    Stream<List<int>> myStream = collectionArticle.find({})
-        .map((item) => jsonEncode(item).codeUnits);
+    var myStream = collectionArticle.find({"author": "zaq12wsx2"});
 
-    return Response.ok(myStream)..encodeBody = false;
+    return Response.ok(myStream);
   }
 }
