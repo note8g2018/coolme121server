@@ -1,13 +1,11 @@
 import 'coolme121server.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 
 /// This type initializes an application.
 ///
 /// Override methods in this class to set up routes and initialize services like
 /// database connections. See http://aqueduct.io/docs/http/channel/.
 class Coolme121serverChannel extends ApplicationChannel {
-  // ignore: close_sinks
-  final StreamController<String> controller = StreamController<String>();
+
   /// Initialize services in this method.
   ///
   /// Implement this method to initialize services, read values from [options]
@@ -17,21 +15,6 @@ class Coolme121serverChannel extends ApplicationChannel {
   @override
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
-
-
-      const String url =
-          'mongodb://note8g2018:123456789@localhost:27017/flutter?authSource=admin';
-      final Db db = Db(url);
-      await db.open();
-      final DbCollection collectionArticle = db.collection('articles');
-      var cursor = collectionArticle.createCursor({"author": "zaq12wsx2"});
-    
-    for (var doc = await cursor.nextObject(); doc != null; doc = await cursor.nextObject())
-    {
-      controller.add(jsonEncode(doc));
-    }
-
-
 
   }
 
@@ -84,12 +67,12 @@ class Coolme121serverChannel extends ApplicationChannel {
 
     router.route('/articleall').link(() => ArticleAllController());
 
-    router.route("/articlealls").linkFunction((req) async {
-      return Response.ok(controller.stream)
-        ..bufferOutput = false
-        ..contentType = ContentType(
-            "text", "event-stream", charset: "utf-8");
-    });
+//    router.route("/articlealls").linkFunction((req) async {
+//      return Response.ok(controller.stream)
+//        ..bufferOutput = false
+//        ..contentType = ContentType(
+//            "text", "event-stream", charset: "utf-8");
+//    });
 
     return router;
   }
